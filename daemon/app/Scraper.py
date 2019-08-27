@@ -150,7 +150,7 @@ class WebScraper:
         return title
 
     @staticmethod
-    def _iterate_decorators(page_name) -> str:
+    def _iterate_decorators(page_name) -> []:
         category = []
         for key in DECORATOR:
             dec = str.upper(DECORATOR[key])

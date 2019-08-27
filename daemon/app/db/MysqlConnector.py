@@ -8,7 +8,7 @@ class Mysql():
     def __init__(self):
         self.connection:MySQLConnection
 
-    def connect(self, database: str = "fc_threads") -> MySQLConnection:
+    def connect(self, database="fc_threads") -> MySQLConnection:
         self.connection = mysql.connector.connect(
             host=DBHOST,
             user=DBUSER,

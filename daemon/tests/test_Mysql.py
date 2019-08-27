@@ -1,5 +1,5 @@
 import unittest
-from daemon.app import Request_session as rs
+
 from daemon.app.db.MysqlConnector import Mysql
 
 

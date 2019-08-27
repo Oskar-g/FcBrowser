@@ -1,5 +1,3 @@
-from mysql.connector import MySQLConnection
-
 from daemon.app.dao.ThreadDao import ThreadDao
 from daemon.app.db.db_decorators import auto_comit
 from daemon.app.entities import Thread
