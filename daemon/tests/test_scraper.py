@@ -44,12 +44,6 @@ class SessionTest(unittest.TestCase):
         ws.parse_page("https://www.forocoches.com/foro/showthread.php?t=7373097")
         self.assertEqual(ws.get_page_category(), "+HD,+ENCUESTA")
 
-    def test_get_page_name_is_null(self):
-        cookie = rS.get_cookie()
-        ws = WebScraper(cookie)
-        text = ws.get_page_index()
-        self.assertEqual(text, "")
-
     def test_get_page_name_is_valid(self):
         cookie = rS.get_cookie()
         ws = WebScraper(cookie)
@@ -61,14 +55,14 @@ class SessionTest(unittest.TestCase):
         cookie = rS.get_cookie()
         ws = WebScraper(cookie)
         text = ws.get_page_index()
-        self.assertEqual(text, "")
+        self.assertEqual(text, 0)
 
     def test_get_page_index_is_valid(self):
         cookie = rS.get_cookie()
         ws = WebScraper(cookie)
         ws.parse_page("https://www.forocoches.com/foro/showthread.php?t=7383485")
         text = ws.get_page_index()
-        self.assertEqual(text, "7383485")
+        self.assertEqual(text, 7383485)
 
     def test_clean_Scraper(self):
         cookie = rS.get_cookie()
