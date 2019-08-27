@@ -8,6 +8,12 @@ from daemon.app.Scraper import WebScraper
 
 class SessionTest(unittest.TestCase):
 
+    def test_page_is_invalid(self):
+        cookie = rS.get_cookie()
+        ws = WebScraper(cookie)
+        ws.parse_page("https://www.forocoches.com/foro/showthread.php?t=1")
+        self.assertTrue(ws.is_invalid_thread())
+
     def test_page_is_private(self):
         cookie = rS.get_cookie()
         ws = WebScraper(cookie)

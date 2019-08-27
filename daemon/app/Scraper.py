@@ -17,7 +17,7 @@ class WebScraper:
         self.url = ""
 
     def is_invalid_thread(self):
-        return self.__private_web
+        return self.__invalid_web
 
     def is_private_web(self):
         return self.__private_web
@@ -72,9 +72,9 @@ class WebScraper:
     def _check_invalid_web(self) -> ():
         title = self._get_page_title()
 
-        self.__private_web = False
+        self.__invalid_web = False
         if INVALID_PAGE_TITLE == title:
-            self.__private_web = True
+            self.__invalid_web = True
 
     def _check_private_web(self) -> ():
         title = self._get_page_title()
@@ -83,17 +83,17 @@ class WebScraper:
         if PRIVATE_PAGE_TITLE == title:
             self.__private_web = True
 
-    def get_page_index(self) -> str:
+    def get_page_index(self) -> int:
         if self.url == "":
             print("No se ha indicado URL")
-            return ""
+            return 0
 
         index = self.url.split("=", 1)
         if len(index) != 2:
             print("No se pudo obtener el indice")
-            return ""
+            return 0
 
-        return index[1]
+        return int(index[1])
 
     def get_page_name(self) -> str:
         """

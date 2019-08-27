@@ -1,11 +1,10 @@
-from daemon.app import Scraper
-from daemon.app.entities import Thread
+from daemon.app.Scraper import WebScraper
+from daemon.app.entities.Thread import Thread
 
 
-def scrap_thread_data(scraper: Scraper):
+def scrap_thread_data(scraper: WebScraper) -> Thread:
     key = scraper.get_page_index()
     name = scraper.get_page_name()
     category = scraper.get_page_category()
     url = scraper.get_page_url()
-    thread = Thread(key, name, category, url)
-    return thread
+    return Thread(key, name, category, url)

@@ -1,6 +1,6 @@
 from daemon.app.dao.ThreadDao import ThreadDao
 from daemon.app.db.db_decorators import auto_comit
-from daemon.app.entities import Thread
+from daemon.app.entities.Thread import Thread
 
 
 class ThreadSrv:
@@ -12,7 +12,7 @@ class ThreadSrv:
         print("Creating row: ", thread)
         self.dao.create(thread)
 
-    def read(self, key: str = None):
+    def read(self, key: int = None):
         self.threadDao = ThreadDao()
         thread = self.dao.read(key)
         print(thread)
@@ -24,6 +24,10 @@ class ThreadSrv:
         self.dao.update(thread)
 
     @auto_comit
-    def delete(self, key: str):
+    def delete(self, key: int):
         print("Deleting row ID: ", key)
         self.dao.delete(key)
+
+    def get_last_thread(self) -> Thread:
+        print("Getting last thread")
+        return self.dao.get_last_row()

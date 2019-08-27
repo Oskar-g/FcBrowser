@@ -20,20 +20,20 @@ class ThreadDao:
             val = (thread.id, thread.name, thread.category, thread.url)
             self.conn.cursor().execute(sql, val)
 
-    def read(self, key: str = None):
+    def read(self, key: int = None):
         if key is None:
             return self._read_many()
 
         return self._read_one(key)
 
-    def _read_one(self, key: str):
+    def _read_one(self, key: int) -> Thread:
         sql = "SELECT * FROM {} WHERE id = %s".format(THREAD_TABLE)
         val = (key,)
         cursor = self.conn.cursor()
         cursor.execute(sql, val)
         return cursor.fetchone()
 
-    def _read_many(self):
+    def _read_many(self) -> []:
         sql = "SELECT * FROM {}".format(THREAD_TABLE)
         cursor = self.conn.cursor()
         cursor.execute(sql)
@@ -44,7 +44,13 @@ class ThreadDao:
         val = (thread.name, thread.category, thread.url, thread.id)
         self.conn.cursor().execute(sql, val)
 
-    def delete(self, key: str):
+    def delete(self, key: int):
         sql = "DELETE FROM {} WHERE id = %s".format(THREAD_TABLE)
         val = (key,)
         self.conn.cursor().execute(sql, val)
+
+    def get_last_row(self) -> Thread:
+        sql = "SELECT * FROM {} ORDER BY id DESC LIMIT 1".format(THREAD_TABLE)
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        return cursor.fetchone()
