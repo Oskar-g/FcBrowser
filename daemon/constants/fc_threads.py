@@ -6,7 +6,6 @@ LOGIN_SUBMIT = 'https://www.forocoches.com/foro/login.php'
 GENERAL_URL = 'https://www.forocoches.com/foro/forumdisplay.php?f=2'
 THREAD_URL = 'https://www.forocoches.com/foro/showthread.php?t={}'
 
-
 USER = "Sathariel"
 PASSWORD = "~D3l4cr01x~"
 MEMBER_URL = "https://www.forocoches.com/foro/member.php?u=751115"

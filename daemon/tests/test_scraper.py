@@ -51,7 +51,6 @@ class SessionTest(unittest.TestCase):
         text = ws.get_page_name()
         self.assertEqual(text, "Nativa del AMAZONAS viendo como QUEMAN SU PUEBLO y llorando de rabia")
 
-
     def test_get_page_index_is_null(self):
         cookie = rS.get_cookie()
         ws = WebScraper(cookie)

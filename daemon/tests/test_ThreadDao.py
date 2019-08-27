@@ -5,6 +5,7 @@ from daemon.app.entities.Thread import Thread
 
 dao: ThreadDao = ThreadDao()
 
+
 class SessionTest(unittest.TestCase):
 
     def test_create_row(self):

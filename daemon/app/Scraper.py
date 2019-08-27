@@ -19,7 +19,6 @@ class WebScraper:
     def is_invalid_thread(self):
         return self.__private_web
 
-
     def is_private_web(self):
         return self.__private_web
 

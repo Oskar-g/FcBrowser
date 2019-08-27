@@ -6,7 +6,7 @@ from daemon.constants.db import DBHOST, DBUSER, DBPASS
 
 class Mysql():
     def __init__(self):
-        self.connection:MySQLConnection
+        self.connection: MySQLConnection
 
     def connect(self, database="fc_threads") -> MySQLConnection:
         self.connection = mysql.connector.connect(
@@ -22,7 +22,8 @@ class Mysql():
         mycursor.execute("DROP DATABASE IF EXISTS fc_threads")
         mycursor.execute("CREATE DATABASE fc_threads")
         mycursor.execute("USE fc_threads")
-        mycursor.execute("CREATE TABLE threads(id INTEGER PRIMARY KEY, name VARCHAR(255), category VARCHAR(255), url VARCHAR(255))")
+        mycursor.execute(
+            "CREATE TABLE threads(id INTEGER PRIMARY KEY, name VARCHAR(255), category VARCHAR(255), url VARCHAR(255))")
 
     def disconect(self) -> ():
         if self.connection.is_connected():
