@@ -3,8 +3,8 @@ import ssl
 from bs4 import BeautifulSoup
 from requests.sessions import Session
 
-from daemon.constants.beutifulSoup import SOUP_PARSER
-from daemon.constants.fc_threads import DECORATOR, PRIVATE_PAGE_TITLE, INVALID_PAGE_TITLE
+from daemon.constants.beutifulSoup import XML_SOUP_PARSER
+from daemon.constants.fc_threads import THREAD_DECORATOR, PRIVATE_PAGE_TITLE, INVALID_PAGE_TITLE
 
 
 class WebScraper:
@@ -38,7 +38,7 @@ class WebScraper:
         if None is page:
             raise Exception("web no encontrada:", page)
 
-        self.soap = BeautifulSoup(page.content, SOUP_PARSER)
+        self.soap = BeautifulSoup(page.content, XML_SOUP_PARSER)
         self._check_invalid_web()
 
         if not self.__invalid_web:
@@ -151,8 +151,8 @@ class WebScraper:
     @staticmethod
     def _iterate_decorators(page_name) -> []:
         category = []
-        for key in DECORATOR:
-            dec = str.upper(DECORATOR[key])
+        for key in THREAD_DECORATOR:
+            dec = str.upper(THREAD_DECORATOR[key])
             if str.upper(page_name).find(key) >= 0:
                 category.append(dec)
 

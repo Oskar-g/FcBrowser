@@ -1,2 +1,5 @@
 #!/usr/bin/python
-SOUP_PARSER = 'lxml'
+
+# Beautiful soup parsers
+XML_SOUP_PARSER = 'lxml'
+HTML_SOUP_PARSER = 'html.parser'

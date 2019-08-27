@@ -1,19 +1,22 @@
 #!/usr/bin/python
 
+# F.C URLs
 HOME_URL = "https://www.forocoches.com"
 LOGIN_URL = 'https://www.forocoches.com/foro/misc.php?do=page&template=ident'
 LOGIN_SUBMIT = 'https://www.forocoches.com/foro/login.php'
 GENERAL_URL = 'https://www.forocoches.com/foro/forumdisplay.php?f=2'
 THREAD_URL = 'https://www.forocoches.com/foro/showthread.php?t={}'
-
-USER = "Sathariel"
-PASSWORD = "~D3l4cr01x~"
 MEMBER_URL = "https://www.forocoches.com/foro/member.php?u=751115"
+
+# F.C URLs
+USER = "User"
+PASSWORD = "Pass"
 MEMBER_PAGE_TITLE = "ForoCoches - Ver Perfil: {}"
 PRIVATE_PAGE_TITLE = "ForoCoches - Información"
 INVALID_PAGE_TITLE = "ForoCoches"
 
-DECORATOR = {
+# F.C Thread Decorators
+THREAD_DECORATOR = {
     "+PRV": "+PRV",
     "+HD": "+HD",
     "+TOCHO": "+TOCHO",

@@ -32,18 +32,18 @@ def run_project(args):
         index = index + 1
 
 
-def get_last_thread(threadSrv: ThreadSrv) -> int:
-    last_thread = threadSrv.get_last_thread()
-    if (last_thread is None):
+def get_last_thread(thread_srv: ThreadSrv) -> int:
+    last_thread = thread_srv.get_last_thread()
+    if last_thread is None:
         return 0
     else:
-        return last_thread[0]
+        return last_thread.id
 
 
 def init_web_scraper():
-    print("Conectando con sitio web ", HOME_URL)
+    print("Conecting to the website ", HOME_URL)
     cookie = rS.get_cookie()
-    print("inicializando scraper...")
+    print("starting scraper...")
     return WebScraper(cookie)
 
 
