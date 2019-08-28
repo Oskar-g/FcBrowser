@@ -5,8 +5,7 @@ from daemon.app.db.MysqlConnector import Mysql
 
 class SessionTest(unittest.TestCase):
 
-    @staticmethod
-    def test_create_db():
+    def test_create_db(self):
         mysql = Mysql()
         mysql.connect(None)
         mysql.truncateDB()

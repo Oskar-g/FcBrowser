@@ -34,3 +34,7 @@ THREAD_DECORATOR = {
     "+13": "+13",
     "+12": "+12",
 }
+
+THREAD_BASE = "Normal"
+START_INDEX = 2150
+MAX_THREADS = 8000000

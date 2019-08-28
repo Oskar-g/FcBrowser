@@ -1,10 +1,8 @@
-import ssl
-
 from bs4 import BeautifulSoup
 from requests.sessions import Session
 
 from daemon.constants.beutifulSoup import XML_SOUP_PARSER
-from daemon.constants.fc_threads import THREAD_DECORATOR, PRIVATE_PAGE_TITLE, INVALID_PAGE_TITLE
+from daemon.constants.fc_threads import THREAD_DECORATOR, PRIVATE_PAGE_TITLE, INVALID_PAGE_TITLE, THREAD_BASE
 
 
 class WebScraper:
@@ -58,15 +56,8 @@ class WebScraper:
         print("Abriendo direccion: " + url)
 
         if self.session is not None:
-            print("Acceso por COOKIE")
             return self.session.get(url)
 
-        print("Acceso por REQUEST")
-        # Por algún motivo así no funciona...
-        ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
-        # return urlopen(url, context=ctx)
         return None
 
     def _check_invalid_web(self) -> ():
@@ -128,7 +119,7 @@ class WebScraper:
         category = self._iterate_decorators(page_name)
 
         if len(category) == 0:
-            return "Normal"
+            return THREAD_BASE
 
         return ",".join(category)
 

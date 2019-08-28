@@ -2,37 +2,59 @@ from daemon.app import Request_session as rS
 from daemon.app.Parser import scrap_thread_data
 from daemon.app.Scraper import WebScraper
 from daemon.app.srv.ThreadSrv import ThreadSrv
-from daemon.constants.fc_threads import HOME_URL, THREAD_URL
+from daemon.constants.fc_threads import HOME_URL, THREAD_URL, THREAD_BASE, START_INDEX, MAX_THREADS
 
 
 def run_project():
     print("Iniciando aplicación...")
-    print("Límite marcado por el usuario:")
-    limit = int(input())
 
-    ws = init_web_scraper()
     print("Iniciando servicios...")
     thread_srv = ThreadSrv()
+    ws = init_web_scraper()
 
-    print("Verificando último thread guardado...")
-    index = get_last_thread(thread_srv) + 1
-    last_thread = index + limit
+    limit = get_limit(thread_srv)
+    start = get_start_thread(thread_srv)
+    last_thread = start + limit
 
     print("Iniciando spider...")
-    while index <= last_thread:
-        ws.parse_page(THREAD_URL.format(index))
+    while start <= last_thread:
+        ws.parse_page(THREAD_URL.format(start))
 
-        if not ws.is_invalid_thread():
+        if not ws.is_invalid_thread() and ws.get_page_category() != THREAD_BASE:
             thread = scrap_thread_data(ws)
-            thread_srv.create(thread)
+            if thread_srv.read(thread.id) is None:
+                print("Hijo ya existe en el sistema")
+                thread_srv.create(thread)
 
-        index = index + 1
+        start = start + 1
 
 
-def get_last_thread(thread_srv: ThreadSrv) -> int:
+def get_limit(thread_srv):
+    start = get_last_thread(thread_srv)
+    maximum = MAX_THREADS - start
+    print("Cuántos Hilos a escanear?: [{} default]".format(maximum))
+    limit = input()
+    if limit is None or limit == "" or not limit.isnumeric():
+        limit = maximum
+
+    return int(limit)
+
+
+def get_start_thread(thread_srv):
+    start = get_last_thread(thread_srv)
+    print("Desde qué hilo empezamos?: [{} default]".format(start))
+    key = input()
+    if key is None or key == "" or not key.isnumeric():
+        start = start + 1
+    else:
+        start = key
+    return int(start)
+
+
+def get_last_thread(thread_srv) -> int:
     last_thread = thread_srv.get_last_thread()
     if last_thread is None:
-        return 0
+        return START_INDEX
     else:
         return last_thread[0]
 
