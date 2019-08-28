@@ -35,6 +35,7 @@ def start_loop(index, last_thread, ws, thread_srv):
 
         index = index + 1
 
+
 def get_limit(thread_srv):
     start = get_last_thread(thread_srv)
     maximum = MAX_THREADS - start
