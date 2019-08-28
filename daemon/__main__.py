@@ -13,21 +13,27 @@ def run_project():
     ws = init_web_scraper()
 
     limit = get_limit(thread_srv)
-    start = get_start_thread(thread_srv)
-    last_thread = start + limit
+    index = get_start_thread(thread_srv)
+    last_thread = index + limit
 
+    start_loop(index, last_thread, ws, thread_srv)
+
+
+def start_loop(index, last_thread, ws, thread_srv):
     print("Iniciando spider...")
-    while start <= last_thread:
-        ws.parse_page(THREAD_URL.format(start))
+    while index <= last_thread:
+        try:
+            ws.parse_page(THREAD_URL.format(index))
 
-        if not ws.is_invalid_thread() and ws.get_page_category() != THREAD_BASE:
-            thread = scrap_thread_data(ws)
-            if thread_srv.read(thread.id) is None:
-                print("Hijo ya existe en el sistema")
-                thread_srv.create(thread)
+            if not ws.is_invalid_thread() and ws.get_page_category() != THREAD_BASE:
+                thread = scrap_thread_data(ws)
+                if thread_srv.read(thread.id) is None:
+                    thread_srv.create(thread)
 
-        start = start + 1
+        except:
+            print("Ha sucedido un error inesperado, Entrada: ", index)
 
+        index = index + 1
 
 def get_limit(thread_srv):
     start = get_last_thread(thread_srv)

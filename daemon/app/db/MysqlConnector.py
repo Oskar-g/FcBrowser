@@ -4,6 +4,18 @@ from mysql.connector import MySQLConnection
 from daemon.constants.db import DBHOST, DBUSER, DBPASS
 
 
+def restart_database():
+    mysql = Mysql()
+    mysql.connect("")
+    mysql.truncateDB()
+
+
+# ------------------------------------------------------------
+# RESTART DATABASE
+# ------------------------------------------------------------
+if __name__ == '__main__':
+    restart_database()
+
 class Mysql():
     def __init__(self):
         self.connection: MySQLConnection
