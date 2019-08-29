@@ -1,7 +1,7 @@
 import unittest
 
-from daemon.app.dao.ThreadDao import ThreadDao
-from daemon.app.entities.Thread import Thread
+from app.dao.ThreadDao import ThreadDao
+from app.entities.Thread import Thread
 
 dao: ThreadDao = ThreadDao()
 

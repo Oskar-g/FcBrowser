@@ -1,6 +1,6 @@
 import unittest
 
-from daemon.app import Request_session as rs
+from app import Request_session as rs
 
 
 class SessionTest(unittest.TestCase):

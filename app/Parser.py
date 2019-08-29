@@ -1,5 +1,5 @@
-from daemon.app.Scraper import WebScraper
-from daemon.app.entities.Thread import Thread
+from app.Scraper import WebScraper
+from app.entities.Thread import Thread
 
 
 def scrap_thread_data(scraper: WebScraper) -> Thread:

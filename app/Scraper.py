@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from requests.sessions import Session
 
-from daemon.constants.beutifulSoup import XML_SOUP_PARSER
-from daemon.constants.fc_threads import THREAD_DECORATOR, PRIVATE_PAGE_TITLE, INVALID_PAGE_TITLE, THREAD_BASE
+from constants.beutifulSoup import XML_SOUP_PARSER
+from constants.fc_threads import THREAD_DECORATOR, PRIVATE_PAGE_TITLE, INVALID_PAGE_TITLE, THREAD_BASE
 
 
 class WebScraper:

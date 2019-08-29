@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import requests
 
-from daemon.constants import fc_threads
+from constants import fc_threads
 
 
 def get_cookie() -> requests.sessions.Session:

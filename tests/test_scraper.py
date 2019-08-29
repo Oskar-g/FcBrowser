@@ -2,8 +2,8 @@ import unittest
 
 from requests.sessions import Session
 
-from daemon.app import Request_session as rS
-from daemon.app.Scraper import WebScraper
+from app import Request_session as rS
+from app.Scraper import WebScraper
 
 
 class SessionTest(unittest.TestCase):
@@ -38,7 +38,7 @@ class SessionTest(unittest.TestCase):
         ws.parse_page()
         self.assertFalse(ws.is_private_web())
 
-    def test_get_cateogries(self):
+    def test_get_categories(self):
         cookie = rS.get_cookie()
         ws = WebScraper(cookie)
         ws.parse_page("https://www.forocoches.com/foro/showthread.php?t=7373097")

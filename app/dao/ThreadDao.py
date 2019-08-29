@@ -1,8 +1,8 @@
 from mysql.connector import MySQLConnection
 
-from daemon.app.db.MysqlConnector import Mysql
-from daemon.app.entities import Thread
-from daemon.constants.db import THREAD_TABLE
+from app.db.MysqlConnector import Mysql
+from app.entities import Thread
+from constants.db import THREAD_TABLE
 
 
 class ThreadDao:

@@ -8,8 +8,8 @@ GENERAL_URL = 'https://www.forocoches.com/foro/forumdisplay.php?f=2'
 THREAD_URL = 'https://www.forocoches.com/foro/showthread.php?t={}'
 
 # F.C URLs
-USER = "User"
-PASSWORD = "Pass"
+USER = "user"
+PASSWORD = "****"
 MEMBER_PAGE_TITLE = "ForoCoches - Ver Perfil: {}"
 PRIVATE_PAGE_TITLE = "ForoCoches - Información"
 INVALID_PAGE_TITLE = "ForoCoches"
@@ -36,5 +36,5 @@ THREAD_DECORATOR = {
 }
 
 THREAD_BASE = "Normal"
-START_INDEX = 2150
+START_INDEX = 1
 MAX_THREADS = 8000000

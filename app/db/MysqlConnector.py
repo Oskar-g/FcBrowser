@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import MySQLConnection
 
-from daemon.constants.db import DBHOST, DBUSER, DBPASS
+from constants.db import DBHOST, DBUSER, DBPASS
 
 
 def restart_database():
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     restart_database()
 
 
-class Mysql():
+class Mysql:
     def __init__(self):
         self.connection = None
 

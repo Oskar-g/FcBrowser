@@ -1,25 +1,54 @@
-from daemon.app import Request_session as rS
-from daemon.app.Parser import scrap_thread_data
-from daemon.app.Scraper import WebScraper
-from daemon.app.srv.ThreadSrv import ThreadSrv
-from daemon.constants.fc_threads import HOME_URL, THREAD_URL, THREAD_BASE, START_INDEX, MAX_THREADS
+import math
+import sys
+
+from app import Request_session as rS
+from app.Parser import scrap_thread_data
+from app.Scraper import WebScraper
+from app.srv.ThreadSrv import ThreadSrv
+from constants.fc_threads import HOME_URL, THREAD_URL, THREAD_BASE, START_INDEX, MAX_THREADS
 
 
-def run_project():
+def run_project(args):
     print("Iniciando aplicación...")
 
     print("Iniciando servicios...")
     thread_srv = ThreadSrv()
-    ws = init_web_scraper()
+    ws = _init_web_scraper()
 
-    limit = get_limit(thread_srv)
-    index = get_start_thread(thread_srv)
+    index = _get_start(args, thread_srv)
+    limit = _get_limit(args, thread_srv)
+
     last_thread = index + limit
+    _start_loop(index, last_thread, ws, thread_srv)
 
-    start_loop(index, last_thread, ws, thread_srv)
+
+def _get_start(args, thread_srv):
+    if len(args[1:]) < 1:
+        return _user_start_thread(thread_srv)
+
+    else:
+        index = int(args[1:][0])
+        print("Thread inicial: ", index)
+        if math.isnan(index):
+            return _user_start_thread(thread_srv)
+
+        return index
 
 
-def start_loop(index, last_thread, ws, thread_srv):
+def _get_limit(args, thread_srv):
+    if len(args[1:]) < 2:
+        return _user_threads_limit(thread_srv)
+
+    else:
+        limit = int(args[1:][1])
+        print("Cantidad de threads: ", limit)
+        if math.isnan(limit):
+            return _user_threads_limit(thread_srv)
+
+        return limit
+
+
+def _start_loop(index, last_thread, ws, thread_srv):
     print("Iniciando spider...")
     while index <= last_thread:
         try:
@@ -36,7 +65,7 @@ def start_loop(index, last_thread, ws, thread_srv):
         index = index + 1
 
 
-def get_limit(thread_srv):
+def _user_threads_limit(thread_srv):
     start = get_last_thread(thread_srv)
     maximum = MAX_THREADS - start
     print("Cuántos Hilos a escanear?: [{} default]".format(maximum))
@@ -47,7 +76,7 @@ def get_limit(thread_srv):
     return int(limit)
 
 
-def get_start_thread(thread_srv):
+def _user_start_thread(thread_srv):
     start = get_last_thread(thread_srv)
     print("Desde qué hilo empezamos?: [{} default]".format(start))
     key = input()
@@ -66,7 +95,7 @@ def get_last_thread(thread_srv) -> int:
         return last_thread[0]
 
 
-def init_web_scraper():
+def _init_web_scraper():
     print("Conecting to the website ", HOME_URL)
     cookie = rS.get_cookie()
     print("starting scraper...")
@@ -74,4 +103,4 @@ def init_web_scraper():
 
 
 if __name__ == '__main__':
-    run_project()
+    run_project(sys.argv)
